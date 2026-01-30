@@ -1,5 +1,5 @@
-import 'package:crossplatform_assessement_two_app/pages/menus/screen_one.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
+import 'package:crossplatform_assessement_two_app/pages/menus/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,7 +56,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Burger Menu Example'),
+        title: Text('Maintenance Warehouse'),
         leading: Builder(
           builder: (context) => IconButton(icon: Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
         ),
@@ -99,14 +99,14 @@ class MenuScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Welcome to Multi-Screen App', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const Text('Welcome to Maintenance Central!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenOne()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-              child: const Text('Go to Screen One'),
+              child: const Text('Create Account'), // Will need to create new screens for login/sign up
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -114,7 +114,7 @@ class MenuScreen extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenTwo()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-              child: const Text('Go to Screen Two'),
+              child: const Text('Login'), // Will need to create new screens for login/sign up
             ),
           ],
         ),

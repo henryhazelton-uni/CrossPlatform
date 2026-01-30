@@ -1,5 +1,4 @@
-// Screen One
-// This is going to be the place to view logs etc
+// Login or Create User Screen
 
 import 'package:flutter/material.dart';
 
