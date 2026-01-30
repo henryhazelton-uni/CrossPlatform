@@ -2,17 +2,17 @@ import 'package:crossplatform_assessement_two_app/models/user_payload.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() async {
-  User myNewUser = User(userId: 1, id: 101, password: 'password');
-  print('Successfully created User instance: ${myNewUser.password}');
+// void main() async {
+//   User myNewUser = User(userId: 1, id: 101, password: 'password');
+//   print('Successfully created User instance: ${myNewUser.password}');
 
-  createUser(myNewUser);
-  print(myNewUser.id);
-  User someUser = await fetchUser(1);
-  print(someUser.userId);
-  print(someUser.id);
-  print(someUser.password);
-}
+//   createUser(myNewUser);
+//   print(myNewUser.id);
+//   User someUser = await fetchUser(1);
+//   print(someUser.userId);
+//   print(someUser.id);
+//   print(someUser.password);
+// }
 
 void createUser(User user) async {
   final response = await http.post(
