@@ -1,6 +1,7 @@
 // Screen to create an account and take in user inputs
 
 import 'package:crossplatform_assessement_two_app/main.dart';
+import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/screen_one.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  String displayText = 'Hello from Screen One!';
+  String displayText = 'Hello from Signup Screen!!';
   int buttonPressCount = 0;
   void updateText() {
     setState(() {
@@ -78,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: const Text('Create Account'), // Will need to create new screens for login/sign up
             ),
             const SizedBox(height: 20),
+
             // ElevatedButton(
             //   onPressed: () {
             //     Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
@@ -85,6 +87,12 @@ class _SignupScreenState extends State<SignupScreen> {
             //   style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
             //   child: const Text('Login'), // Will need to create new screens for login/sign up
             // ),
+            UserNameInput(
+              onSubmitEntry: (String guess) {
+                // TODO, handle guess
+                print(guess); // Temporary
+              },
+            ),
           ],
         ),
       ),
