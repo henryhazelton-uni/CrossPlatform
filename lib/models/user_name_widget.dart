@@ -27,7 +27,7 @@ class UserNameInput extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              maxLength: 5,
+              maxLength: 12,
               decoration: InputDecoration(
                 border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(35))),
               ),

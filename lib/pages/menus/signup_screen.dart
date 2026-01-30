@@ -2,8 +2,8 @@
 
 import 'package:crossplatform_assessement_two_app/main.dart';
 import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
+import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/screen_one.dart';
-import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -91,6 +91,11 @@ class _SignupScreenState extends State<SignupScreen> {
               onSubmitEntry: (String guess) {
                 // TODO, handle guess
                 print(guess); // Temporary
+              },
+            ),
+            UserPasswordInput(
+              onSubmitEntry: (String password) {
+                print(password);
               },
             ),
           ],
