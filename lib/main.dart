@@ -74,6 +74,7 @@ class MenuScreen extends StatelessWidget {
               title: Text('Home'),
               onTap: () {
                 // Handle navigation or action
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
               },
             ),
             ListTile(
