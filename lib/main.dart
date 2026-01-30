@@ -1,3 +1,5 @@
+import 'package:crossplatform_assessement_two_app/pages/menus/login_screen.dart';
+import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +32,7 @@ class MenuScreen extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                // TODO: Navigate to Screen One
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenOne()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
               child: const Text('Go to Screen One'),
@@ -38,7 +40,7 @@ class MenuScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // TODO: Navigate to Screen Two
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenTwo()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
               child: const Text('Go to Screen Two'),
