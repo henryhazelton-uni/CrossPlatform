@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+
 class ScreenTwo extends StatefulWidget {
-  const ScreenTwo({Key? key}) : super(key: key);
+  const ScreenTwo({super.key});
   @override
   State<ScreenTwo> createState() => _ScreenTwoState();
 }
@@ -33,10 +35,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen Two'),
-        backgroundColor: Colors.teal.shade700,
-      ),
+      appBar: AppBar(title: const Text('Screen Two'), backgroundColor: Colors.teal.shade700),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -48,13 +47,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
                 color: Colors.amber.shade50,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    userMessage,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  child: Text(userMessage, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 ),
               ),
             const SizedBox(height: 20),
@@ -62,9 +55,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
               controller: _textController,
               decoration: InputDecoration(
                 labelText: 'Enter your message',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                 prefixIcon: const Icon(Icons.message),
               ),
             ),
@@ -72,10 +63,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: submitText,
-                    child: const Text('Submit'),
-                  ),
+                  child: ElevatedButton(onPressed: submitText, child: const Text('Submit')),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -94,13 +82,9 @@ class _ScreenTwoState extends State<ScreenTwo> {
             const SizedBox(height: 15),
             ElevatedButton.icon(
               onPressed: toggleVisibility,
-              icon: Icon(
-                isMessageVisible ? Icons.visibility_off : Icons.visibility,
-              ),
+              icon: Icon(isMessageVisible ? Icons.visibility_off : Icons.visibility),
               label: Text(isMessageVisible ? 'Hide Message' : 'Show Message'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal.shade600,
-              ),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal.shade600),
             ),
             const SizedBox(height: 30),
             const Divider(thickness: 2),
