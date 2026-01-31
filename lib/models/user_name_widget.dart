@@ -11,7 +11,7 @@ class UserNameInput extends StatelessWidget {
   // This is responsible for controlling the text stuff
   final TextEditingController _textEditingController = TextEditingController();
 
-  // final FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
 
   // void _onSubmit() {
   //   onSubmitEntry(_textEditingController.text);
@@ -27,23 +27,13 @@ class UserNameInput extends StatelessWidget {
         maxLength: 12,
         decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(35)))),
         controller: _textEditingController, // Ability to capture text in this line
-        // autofocus: true,
-        // focusNode: _focusNode,
+        autofocus: true,
+        focusNode: _focusNode,
         onChanged: (String input) {
           // This takes the input when user presses enter on the keyboard
           onSubmitEntry(input);
         },
       ),
     );
-    // ),
-    // IconButton(
-    //   padding: EdgeInsets.zero,
-    //   icon: Icon(Icons.arrow_circle_up),
-    //   onPressed: () {
-    //     _onSubmit();
-    //   },
-    // ),
-    //   ],
-    // );
   }
 }

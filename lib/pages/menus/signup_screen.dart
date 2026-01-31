@@ -3,7 +3,6 @@
 import 'package:crossplatform_assessement_two_app/main.dart';
 import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
 import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';
-import 'package:crossplatform_assessement_two_app/pages/menus/screen_one.dart';
 import 'package:crossplatform_assessement_two_app/networking/user_api.dart';
 import 'package:crossplatform_assessement_two_app/models/user_payload.dart';
 
@@ -79,13 +78,6 @@ class _SignupScreenState extends State<SignupScreen> {
             const Text('Create an account!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 40),
             const SizedBox(height: 20),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
-            //   },
-            //   style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-            //   child: const Text('Login'), // Will need to create new screens for login/sign up
-            // ),
             UserNameInput(
               onSubmitEntry: (String userName) {
                 _userName = userName;
