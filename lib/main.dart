@@ -1,4 +1,4 @@
-import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
+import 'package:crossplatform_assessement_two_app/pages/menus/login_screen.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -111,7 +111,7 @@ class MenuScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenTwo()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
               child: const Text('Login'), // Will need to create new screens for login/sign up

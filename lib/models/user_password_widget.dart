@@ -3,15 +3,25 @@
 
 import 'package:flutter/material.dart';
 
-class UserPasswordInput extends StatelessWidget {
-  UserPasswordInput({super.key, required this.onSubmitEntry});
-
+class UserPasswordInput extends StatefulWidget {
+  const UserPasswordInput({super.key, required this.onSubmitEntry});
   final void Function(String) onSubmitEntry; // this will be the function to take the users input, returns nothing
 
+  @override
+  State<UserPasswordInput> createState() => _UserPasswordInputState();
+}
+
+class _UserPasswordInputState extends State<UserPasswordInput> {
   // This is responsible for controlling the text stuff
   final TextEditingController _textEditingController = TextEditingController();
-
   final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,7 @@ class UserPasswordInput extends StatelessWidget {
         focusNode: _focusNode,
         onChanged: (String input) {
           // This takes the input when user presses enter on the keyboard
-          onSubmitEntry(input);
+          widget.onSubmitEntry(input);
         },
       ),
     );

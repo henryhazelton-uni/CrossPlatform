@@ -1,16 +1,26 @@
-// Login or Create User Screen
+// Screen to create an account and take in user inputs
+
+import 'package:crossplatform_assessement_two_app/main.dart';
+import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
+import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';
+import 'package:crossplatform_assessement_two_app/networking/user_api.dart';
+import 'package:crossplatform_assessement_two_app/models/user_payload.dart';
 
 import 'package:flutter/material.dart';
 
-class ScreenOne extends StatefulWidget {
-  const ScreenOne({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
   @override
-  State<ScreenOne> createState() => _ScreenOneState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _ScreenOneState extends State<ScreenOne> {
-  String displayText = 'Hello from Screen One!';
+class _LoginScreenState extends State<LoginScreen> {
+  String displayText = 'Hello from Signup Screen!!';
   int buttonPressCount = 0;
+  // Add some variables to store values
+  String _userName = "";
+  String _userPassword = "";
+
   void updateText() {
     setState(() {
       buttonPressCount++;
@@ -21,46 +31,71 @@ class _ScreenOneState extends State<ScreenOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Screen One')),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      appBar: AppBar(
+        title: Text('Create an account'),
+        leading: Builder(
+          builder: (context) => IconButton(icon: Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Menu Header', style: TextStyle(color: Colors.white, fontSize: 14)),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                // Handle navigation or action
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Handle navigation or action
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () {
+                // Handle navigation or action
+              },
+            ),
+          ],
+        ),
+      ),
+
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.teal.shade50,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.teal, width: 2),
-              ),
-              child: Text(displayText, style: const TextStyle(fontSize: 20), textAlign: TextAlign.center),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
-              onPressed: updateText,
-              icon: const Icon(Icons.refresh),
-              label: const Text('Update Text'),
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 15)),
-            ),
-            const SizedBox(height: 15),
-            OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  displayText = 'Hello from Screen One!';
-                  buttonPressCount = 0;
-                });
+            const Text('Login to your account', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+            UserNameInput(
+              onSubmitEntry: (String userName) {
+                _userName = userName;
               },
-              style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 15)),
-              child: const Text('Reset'),
             ),
-            const SizedBox(height: 15),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
+            UserPasswordInput(
+              onSubmitEntry: (String password) {
+                _userPassword = password;
               },
-              child: const Text('Back to Menu'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                User existingUser = User(userName: _userName, password: _userPassword);
+                await loginUser(existingUser);
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenOne()));
+              },
+              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+              child: const Text('Login'), // Will need to create new screens for login/sign up
             ),
           ],
         ),

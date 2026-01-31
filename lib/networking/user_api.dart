@@ -33,16 +33,34 @@ Future<void> createUser(User user) async {
   }
 }
 
-Future<User> fetchUser(int id) async {
-  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/Users/$id'));
+Future<User> fetchUser(User user) async {
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/Users/$user.id'));
 
   switch (response.statusCode) {
     case 200:
       return User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     case 404:
-      print('User not found, dumbass');
       throw Exception('User not found');
     default:
       throw Exception('Failed to fetch User (user for uni project)');
+  }
+}
+
+Future<User> loginUser(User user) async {
+  final response = await http.post(
+    Uri.parse('http://localhost:5000/api/v1/users/login'),
+    headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
+    body: jsonEncode(user.toJson()),
+  );
+
+  switch (response.statusCode) {
+    case 200:
+      return user;
+    case 401:
+      throw Exception('Invalid username or password');
+    case 400:
+      throw Exception('Username and password are required');
+    default:
+      throw Exception('Failed to login');
   }
 }
