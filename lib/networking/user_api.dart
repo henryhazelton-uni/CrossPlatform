@@ -16,15 +16,15 @@ import 'dart:convert';
 
 Future<void> createUser(User user) async {
   final response = await http.post(
-    Uri.parse('https://jsonplaceholder.typicode.com/Users'),
+    Uri.parse('http://localhost:5000/api/v1/users'),
     headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
     body: jsonEncode(user.toJson()),
   );
 
   switch (response.statusCode) {
     case 201:
-      User userResponse = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      user.userName = userResponse.userName;
+      // User userResponse = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      // user.userName = userResponse.userName;
       break;
     case 409:
       throw Exception('User already exists');

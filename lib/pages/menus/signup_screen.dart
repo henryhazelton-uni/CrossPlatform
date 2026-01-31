@@ -99,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ElevatedButton(
               onPressed: () async {
                 User newUser = User(userName: _userName, password: _userPassword);
-                createUser(newUser);
+                await createUser(newUser);
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenOne()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),

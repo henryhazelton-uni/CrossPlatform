@@ -6,12 +6,12 @@ class User {
   User({this.userId = 0, required this.userName, required this.password});
 
   Map<String, dynamic> toJson() {
-    return {'userId': userId, 'userName': userName, 'password': password};
+    return {'userId': userId, 'username': userName, 'password': password};
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return switch (json) {
-      {'userId': int userId, 'userName': String userName, 'password': String password} => User(
+      {'userId': int userId, 'username': String userName, 'password': String password} => User(
         userId: userId,
         userName: userName,
         password: password,

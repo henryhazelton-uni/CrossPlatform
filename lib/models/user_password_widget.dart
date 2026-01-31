@@ -31,7 +31,7 @@ class UserPasswordInput extends StatelessWidget {
         // focusNode: _focusNode,
         onChanged: (String input) {
           // This takes the input when user presses enter on the keyboard
-          onSubmitEntry;
+          onSubmitEntry(input);
         },
       ),
     );
