@@ -14,7 +14,7 @@ import 'dart:convert';
 //   print(someUser.password);
 // }
 
-void createUser(User user) async {
+Future<void> createUser(User user) async {
   final response = await http.post(
     Uri.parse('https://jsonplaceholder.typicode.com/Users'),
     headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
@@ -24,7 +24,7 @@ void createUser(User user) async {
   switch (response.statusCode) {
     case 201:
       User userResponse = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      user.id = userResponse.id;
+      user.userName = userResponse.userName;
       break;
     case 409:
       throw Exception('User already exists');

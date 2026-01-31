@@ -4,6 +4,9 @@ import 'package:crossplatform_assessement_two_app/main.dart';
 import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
 import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/screen_one.dart';
+import 'package:crossplatform_assessement_two_app/networking/user_api.dart';
+import 'package:crossplatform_assessement_two_app/models/user_payload.dart';
+
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -15,6 +18,10 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   String displayText = 'Hello from Signup Screen!!';
   int buttonPressCount = 0;
+  // Add some variables to store values
+  String _userName = "";
+  String _userPassword = "";
+
   void updateText() {
     setState(() {
       buttonPressCount++;
@@ -71,15 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
           children: [
             const Text('Create an account!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenOne()));
-              },
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-              child: const Text('Create Account'), // Will need to create new screens for login/sign up
-            ),
             const SizedBox(height: 20),
-
             // ElevatedButton(
             //   onPressed: () {
             //     Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
@@ -88,15 +87,23 @@ class _SignupScreenState extends State<SignupScreen> {
             //   child: const Text('Login'), // Will need to create new screens for login/sign up
             // ),
             UserNameInput(
-              onSubmitEntry: (String guess) {
-                // TODO, handle guess
-                print(guess); // Temporary
+              onSubmitEntry: (String userName) {
+                _userName = userName;
               },
             ),
             UserPasswordInput(
               onSubmitEntry: (String password) {
-                print(password);
+                _userPassword = password;
               },
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                User newUser = User(userName: _userName, password: _userPassword);
+                createUser(newUser);
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenOne()));
+              },
+              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+              child: const Text('Create Account'), // Will need to create new screens for login/sign up
             ),
           ],
         ),

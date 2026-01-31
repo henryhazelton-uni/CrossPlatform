@@ -1,19 +1,19 @@
 class User {
   final int userId;
-  int id;
+  String userName;
   final String password;
 
-  User({required this.userId, this.id = 0, required this.password});
+  User({this.userId = 0, required this.userName, required this.password});
 
   Map<String, dynamic> toJson() {
-    return {'userId': userId, 'id': id, 'password': password};
+    return {'userId': userId, 'userName': userName, 'password': password};
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return switch (json) {
-      {'userId': int userId, 'id': int id, 'password': String password} => User(
+      {'userId': int userId, 'userName': String userName, 'password': String password} => User(
         userId: userId,
-        id: id,
+        userName: userName,
         password: password,
       ),
       _ => throw const FormatException('Failed to load album.'),
