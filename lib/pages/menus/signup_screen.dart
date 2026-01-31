@@ -1,10 +1,13 @@
 // Screen to create an account and take in user inputs
 
+import 'dart:ui';
+
 import 'package:crossplatform_assessement_two_app/main.dart';
 import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
 import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';
 import 'package:crossplatform_assessement_two_app/networking/user_api.dart';
 import 'package:crossplatform_assessement_two_app/models/user_payload.dart';
+import 'package:crossplatform_assessement_two_app/pages/menus/screen_two.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,6 +23,8 @@ class _SignupScreenState extends State<SignupScreen> {
   // Add some variables to store values
   String _userName = "";
   String _userPassword = "";
+
+  static const snackBar = SnackBar(content: Text('Successfully created an account!'));
 
   void updateText() {
     setState(() {
@@ -92,7 +97,8 @@ class _SignupScreenState extends State<SignupScreen> {
               onPressed: () async {
                 User newUser = User(userName: _userName, password: _userPassword);
                 await createUser(newUser);
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenOne()));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
               child: const Text('Create Account'), // Will need to create new screens for login/sign up
