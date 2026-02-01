@@ -32,8 +32,9 @@ Future<User> createUser(User user) async {
   }
 }
 
-Future<User> fetchUser(User user) async {
-  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/Users/$user.id'));
+Future<User> fetchUser(int userId) async {
+  final response = await http.get(Uri.parse('http://localhost:5000/api/v1/users/$userId'));
+  // /api/v1/users/<int:user_id>
 
   switch (response.statusCode) {
     case 200:
