@@ -12,7 +12,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {'id': int id, 'username': String userName} => User(id: id, userName: userName),
-      _ => throw const FormatException('Failed to load album.'),
+      _ => throw const FormatException('Failed to load user.'),
     };
   }
 }
