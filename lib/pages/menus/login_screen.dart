@@ -94,12 +94,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: () async {
                 User existingUser = User(userName: _userName, password: _userPassword);
-                int userId = await loginUser(existingUser); // get the user, and the get id for managing logs
-                if (!context.mounted) {
-                  return;
+                try {
+                  int userId = await loginUser(existingUser); // get the user, and the get id for managing logs
+                  if (!context.mounted) {
+                    return;
+                  }
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo(userId: userId)));
+                } catch (e) {
+                  if (!context.mounted) {
+                    return;
+                  }
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
                 }
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo(userId: userId)));
               },
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
               child: const Text('Login'), // Will need to create new screens for login/sign up
