@@ -1,10 +1,11 @@
 // Screen Two
-// Going to be the place to
+// Going to be the place to manage logs
 
 import 'package:flutter/material.dart';
 
 class ScreenTwo extends StatefulWidget {
-  const ScreenTwo({super.key});
+  final int userId;
+  const ScreenTwo({super.key, required this.userId});
   @override
   State<ScreenTwo> createState() => _ScreenTwoState();
 }

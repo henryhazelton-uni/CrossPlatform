@@ -14,7 +14,7 @@ import 'dart:convert';
 //   print(someUser.password);
 // }
 
-Future<void> createUser(User user) async {
+Future<User> createUser(User user) async {
   final response = await http.post(
     Uri.parse('http://localhost:5000/api/v1/users'),
     headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
@@ -23,13 +23,12 @@ Future<void> createUser(User user) async {
 
   switch (response.statusCode) {
     case 201:
-      // User userResponse = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      // user.userName = userResponse.userName;
-      break;
+      var responseData = jsonDecode(response.body);
+      return User.fromJson(responseData as Map<String, dynamic>);
     case 409:
       throw Exception('User already exists');
     default:
-      throw Exception('Failed to create User (user for uni project)');
+      throw Exception('Failed to create user');
   }
 }
 
