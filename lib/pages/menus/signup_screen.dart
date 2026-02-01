@@ -95,6 +95,9 @@ class _SignupScreenState extends State<SignupScreen> {
               onPressed: () async {
                 User newUser = User(userName: _userName, password: _userPassword);
                 await createUser(newUser);
+                if (!context.mounted) {
+                  return;
+                }
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
               },

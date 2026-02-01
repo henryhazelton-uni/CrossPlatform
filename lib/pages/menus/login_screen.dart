@@ -95,6 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () async {
                 User existingUser = User(userName: _userName, password: _userPassword);
                 await loginUser(existingUser);
+                if (!context.mounted) {
+                  return;
+                }
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenTwo()));
               },
