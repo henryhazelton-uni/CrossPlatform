@@ -1,7 +1,5 @@
 // Screen to create an account and take in user inputs
 
-import 'dart:ui';
-
 import 'package:crossplatform_assessement_two_app/main.dart';
 import 'package:crossplatform_assessement_two_app/models/user_name_widget.dart';
 import 'package:crossplatform_assessement_two_app/models/user_password_widget.dart';

@@ -46,7 +46,7 @@ Future<User> fetchUser(User user) async {
   }
 }
 
-Future<User> loginUser(User user) async {
+Future<int> loginUser(User user) async {
   final response = await http.post(
     Uri.parse('http://localhost:5000/api/v1/users/login'),
     headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
@@ -55,7 +55,10 @@ Future<User> loginUser(User user) async {
 
   switch (response.statusCode) {
     case 200:
-      return user;
+      var responseData = jsonDecode(response.body);
+      var userData = responseData['user'];
+      var user = User.fromJson(userData);
+      return user.id;
     case 401:
       throw Exception('Invalid username or password');
     case 400:
