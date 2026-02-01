@@ -33,7 +33,7 @@ class MaintenanceLog {
         'description': String description,
         'priority': String priority,
         'status': String status,
-        // 'user_id': int userId, // dont need userid from server only when sending
+        'user_id': int userId, // dont need userid from server only when sending
         'created_at': String dateCreated,
         'updated_at': String dateUpdated,
       } =>
@@ -43,7 +43,7 @@ class MaintenanceLog {
           description: description,
           priority: priority,
           status: status,
-          // userId: userId,
+          userId: userId,
           dateCreated: dateCreated,
           dateUpdated: dateUpdated,
         ), // unsure what goes in both of these things

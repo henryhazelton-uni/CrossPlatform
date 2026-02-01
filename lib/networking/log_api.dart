@@ -26,7 +26,7 @@ Future<MaintenanceLog> createLog(MaintenanceLog maintenanceLog) async {
   }
 }
 
-Future<List<MaintenanceLog>> getMaintenanceLogs() async {
+Future<List<MaintenanceLog>> getMaintenanceLogs(int userId) async {
   final response = await http.get(
     Uri.parse('http://localhost:5000/api/v1/logs'),
     headers: {'X-API-Key': 'api_warehouse_student_key_1234567890abcdef'},
@@ -35,7 +35,10 @@ Future<List<MaintenanceLog>> getMaintenanceLogs() async {
   switch (response.statusCode) {
     case 200:
       List<dynamic> responseData = jsonDecode(response.body);
-      List<MaintenanceLog> logEntries = responseData.map((e) => MaintenanceLog.fromJson(e)).toList();
+      List<MaintenanceLog> logEntries = responseData
+          .map((e) => MaintenanceLog.fromJson(e))
+          .where((log) => log.userId == userId)
+          .toList();
       return logEntries;
     default:
       throw Exception('Failed to fetch logs');

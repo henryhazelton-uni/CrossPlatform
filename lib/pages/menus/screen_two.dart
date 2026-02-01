@@ -24,7 +24,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
 
   void _loadLogs() async {
     try {
-      List<MaintenanceLog> logs = await getMaintenanceLogs();
+      List<MaintenanceLog> logs = await getMaintenanceLogs(widget.userId);
       setState(() {
         _logs = logs;
       });
