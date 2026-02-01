@@ -33,32 +33,34 @@ class _ScreenTwoState extends State<ScreenTwo> {
     }
   }
 
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   String userMessage = 'Enter text below and press submit';
   bool isMessageVisible = true;
 
   // Create the log
   Future<void> _createLog() async {
-    if (_textController.text.isEmpty) {
+    if (_titleController.text.isEmpty) {
       return;
     }
     try {
       MaintenanceLog newLog = MaintenanceLog(
-        title: _textController.text,
-        description: 'A description of the log', // could add functionality in future
+        title: _titleController.text,
+        description: _descriptionController.text, // could add functionality in future
         priority: 'medium', // default to medium, could be used to update in future
         status: 'open', // can add functionality in future to change this
         userId: widget.userId, // this means the log is automatically assigned to the user the screen has
       );
       await createLog(newLog);
-      _textController.clear();
+      _titleController.clear();
+      _descriptionController.clear();
       _loadLogs(); // refresh the logs showing
     } catch (e) {
       throw Exception(e);
     }
     // setState(() {
-    //   if (_textController.text.isNotEmpty) {
-    //     userMessage = 'You entered: ${_textController.text}';
+    //   if (_titleController.text.isNotEmpty) {
+    //     userMessage = 'You entered: ${_titleController.text}';
     //   } else {
     //     userMessage = 'Please enter some text!';
     //   }
@@ -73,7 +75,8 @@ class _ScreenTwoState extends State<ScreenTwo> {
 
   @override
   void dispose() {
-    _textController.dispose();
+    _titleController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -97,9 +100,18 @@ class _ScreenTwoState extends State<ScreenTwo> {
               ),
             const SizedBox(height: 20),
             TextField(
-              controller: _textController,
+              controller: _titleController,
               decoration: InputDecoration(
-                labelText: 'Enter your message',
+                labelText: 'Log Title',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                prefixIcon: const Icon(Icons.title),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _descriptionController,
+              decoration: InputDecoration(
+                labelText: 'Enter log message here',
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                 prefixIcon: const Icon(Icons.message),
               ),
@@ -115,7 +127,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
                   child: OutlinedButton(
                     onPressed: () {
                       setState(() {
-                        _textController.clear();
+                        _titleController.clear();
                         userMessage = 'Enter text below and press submit';
                       });
                     },
