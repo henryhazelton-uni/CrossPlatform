@@ -32,7 +32,10 @@ class _ScreenTwoState extends State<ScreenTwo> {
         _logs = logs;
       });
     } catch (e) {
-      throw Exception(e);
+      // Server is down
+      setState(() {
+        _logs = getPendingLogs();
+      });
     }
   }
 
