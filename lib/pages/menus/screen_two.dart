@@ -3,6 +3,7 @@
 
 import 'package:crossplatform_assessement_two_app/models/maintenance_log.dart';
 import 'package:crossplatform_assessement_two_app/networking/log_api.dart';
+import 'package:crossplatform_assessement_two_app/networking/offline_log_service.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTwo extends StatefulWidget {
@@ -24,7 +25,9 @@ class _ScreenTwoState extends State<ScreenTwo> {
 
   void _loadLogs() async {
     try {
+      await syncPendingLogs();
       List<MaintenanceLog> logs = await getMaintenanceLogs(widget.userId);
+      logs.addAll(getPendingLogs());
       setState(() {
         _logs = logs;
       });
@@ -58,13 +61,6 @@ class _ScreenTwoState extends State<ScreenTwo> {
     } catch (e) {
       throw Exception(e);
     }
-    // setState(() {
-    //   if (_titleController.text.isNotEmpty) {
-    //     userMessage = 'You entered: ${_titleController.text}';
-    //   } else {
-    //     userMessage = 'Please enter some text!';
-    //   }
-    // });
   }
 
   void toggleVisibility() {
@@ -151,7 +147,11 @@ class _ScreenTwoState extends State<ScreenTwo> {
             ..._logs.map(
               (log) => Card(
                 margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-                child: ListTile(title: Text(log.title), subtitle: Text(log.description), trailing: Text(log.priority)),
+                child: ListTile(
+                  title: Text(log.title),
+                  subtitle: Text(log.description),
+                  trailing: log.isSynced ? Text(log.priority) : Icon(Icons.cloud_off),
+                ),
               ),
             ),
 

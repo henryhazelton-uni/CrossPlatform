@@ -1,8 +1,12 @@
 import 'package:crossplatform_assessement_two_app/pages/menus/login_screen.dart';
 import 'package:crossplatform_assessement_two_app/pages/menus/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('pendingLogs');
   runApp(const MyApp());
 }
 

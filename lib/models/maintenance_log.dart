@@ -9,6 +9,7 @@ class MaintenanceLog {
   int logId;
   String dateCreated;
   String dateUpdated;
+  bool isSynced;
 
   MaintenanceLog({
     this.title = "",
@@ -19,6 +20,7 @@ class MaintenanceLog {
     this.logId = 0,
     this.dateCreated = "",
     this.dateUpdated = "",
+    this.isSynced = true,
   });
 
   Map<String, dynamic> toJson() {
